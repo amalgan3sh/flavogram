@@ -1,0 +1,113 @@
+{% include 'staff_header.html' %}
+{% include 'sub_header.html' %}
+<center>
+	<h1>Manage Product</h1><br>
+{% if data['updated_view'] %}
+<form method="post" enctype="multipart/form-data">
+		<table style="background-color:rgba(0, 0, 0, 0);>
+			<tr>
+				<th>Product</th>
+				<td><input type="text" class="form-control" pattern="[a-zA-Z\s]{0,20}" required="" value="{{data['updated_view'][0]['product_name']}}" name="pdt_name"></td>
+			</tr>
+			<tr>
+				<th>Choose Category</th>
+				<td><select class="form-control" required="" name="cat_id">
+					<option value="{{data['updated_view'][0]['cat_id']}}">{{data['updated_view'][0]['cat_name']}}</option>
+					{% for i in data['cat'] %}
+					<option value="{{ i['cat_id'] }}">{{ i['cat_name'] }}</option>
+					{% endfor %}
+				</select></td>
+			</tr>
+			<tr>
+				<th>Details</th>
+				<td><textarea class="form-control" required=""  pattern="[a-zA-Z\s]{0,30}" name="det">{{data['updated_view'][0]['product_details']}}</textarea></td>
+			</tr>
+			<tr>
+				<th>Quantity</th>
+				<td><input type="number"  value="{{data['updated_view'][0]['quantity']}}" class="form-control" min="0" required="" name="qty"></td>
+			</tr>
+			<tr>
+				<th>Images</th>
+				<td><input type="file" class="form-control"  required="" name="images"></td>
+			</tr>
+			<tr>
+				<th>Price</th>
+				<td><input type="number" value="{{data['updated_view'][0]['price']}}" class="form-control" min="0" required="" name="price"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><input  class="btn btn-success" type="submit" name="update_submit" value="Update"></td>
+			</tr>
+		</table>
+	</form>
+{% else %}
+
+	<form method="post" enctype="multipart/form-data">
+		<table>
+			<tr>
+				<th>Product</th>
+				<td><input type="text" class="form-control" pattern="[a-zA-Z\s]{0,20}" required="" name="pdt_name"></td>
+			</tr>
+			<tr>
+				<th>Choose Category</th>
+				<td><select class="form-control" required="" name="cat_id">
+					{% for i in data['cat'] %}
+					<option value="{{ i['cat_id'] }}">{{ i['cat_name'] }}</option>
+					{% endfor %}
+				</select></td>
+			</tr>
+			<tr>
+				<th>Details</th>
+				<td><textarea class="form-control" required=""  pattern="[a-zA-Z\s]{0,30}" name="det"></textarea></td>
+			</tr>
+			<tr>
+				<th>Quantity</th>
+				<td><input type="number" class="form-control" min="0" required="" name="qty"></td>
+			</tr>
+			<tr>
+				<th>Images</th>
+				<td><input type="file" class="form-control"  required="" name="images"></td>
+			</tr>
+			<tr>
+				<th>Price</th>
+				<td><input type="number" class="form-control" min="0" required="" name="price"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><input class="btn btn-info" type="submit" name="submit" value="Add Product"></td>
+			</tr>
+		</table>
+	</form>{% endif %}<br>
+	<br>
+	{% if data['view'] %}
+	<h2>Products Details</h2><br>
+	<table class="table">
+		<tr>
+			<th>Sl.No</th>
+			<th>Product</th>
+			<th>Category Name</th>
+			<th>Details</th>
+			<th>Quantity</th>
+			<th>Image</th>
+			<th>Price</th>
+			<th></th>
+		</tr>
+		{% for i in data['view'] %}
+		<tr>
+			<td>{{ loop.index }}</td>
+			<td>{{ i['product_name'] }}</td>
+			<td>{{ i['cat_name'] }}</td>
+			<td>{{ i['product_details'] }}</td>
+			<td>{{ i['quantity'] }}</td>
+			<td><img style="width:100px; height:100px;" src="/{{ i['image'] }}"></td>
+			<td>{{ i['price'] }}</td>
+			<td>
+				<!-- <a href="?action=update&id={{i['product_id']}}" class="btn btn-success">Update</a> -->
+				<a href="?action=remove&id={{i['product_id']}}" class="btn btn-danger" >Remove</a>
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+	{% endif %}
+	<br>
+</center>
+{% include 'sub_footer.html' %}
+{% include 'footer.html' %}

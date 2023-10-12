@@ -1,0 +1,49 @@
+{% include 'user_header.html' %}
+{% include 'sub_header.html' %}
+<center>
+	<form method="post"><br>
+		{% if data['NA'] %}
+
+	<h1>Your Products</h1><br>
+	<table class=table style="width:500px !important;">
+		<tr>
+			<th>Sl.No</th>
+			<th>Product Name</th>
+			<th>Image</th>
+			<th>Quantity</th>
+			<th>Price</th>
+			<th></th>
+		</tr>
+		{% for row in data['NA'] %}
+		<tr>
+			<td>{{ loop.index }}</td>
+			<td>{{ row['product_name'] }}</td>
+			<td><a href="/{{ row['image'] }}"><img width="70" height="70" src="/{{ row['image'] }}"></a></td>
+			<td>{{ row['oqty'] }}</td>
+			<td>{{ row['amount'] }}</td>
+			<td><a class="btn btn-danger" href="?remove_id={{row['order_details_id']}}">Remove</a></td>
+		</tr>
+		{% endfor %}
+	</table>
+{% if data['NA'][0]['status']=='pending' %}
+<h2>Your Payable Amount: {{data['NA'][0]['total']}}</h2>
+<br>
+<a class="btn btn-success" href="user_payment?id={{data['NA'][0]['order_master_id']}}&qty={{data['NA'][0]['oqty']}}&pid={{data['NA'][0]['product_id']}}">Make Payment</a>
+<br><br>
+{% endif %}
+
+
+
+
+</form>{% else %}
+<br><br><br>
+<h3>You have no Products in Cart!!!</h3><br>
+<h3><a class="btn btn-primary" href="user_view_products">Click Here to Purchase</a></h3>
+<br>
+<h3><a class="btn btn-secondary" href="user_view_order_history">Click Here to View Order History</a></h3>
+<br><br><br>
+{% endif %}
+</center>
+
+{% include 'sub_footer.html' %}
+{% include 'footer.html' %}

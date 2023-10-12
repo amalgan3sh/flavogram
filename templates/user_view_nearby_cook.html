@@ -1,0 +1,45 @@
+{% include 'user_header.html' %}
+{% include 'sub_header.html' %}
+<center></br></br>
+	<form method="post"><br>
+	<h1>Products Near by Your Location</h1><br>
+
+	<table class=table style="width:1000px">
+		<!-- <tr>
+			<td></td>
+			<td align="center" colspan="2"><input type="text" placeholder="Search Here..." required class="form-control" name="se"></td>
+			<td><input class="btn btn-primary" type="submit" name="ser" value="Search"></td><td></td><td></td>
+		</tr> -->
+		{% if data['view'] %}
+	<tr>
+		<th>Sl.No</th>
+		<th>Product Name</th>
+		<th>Image</th>
+		<th>Details</th>
+		
+		<th>price</th>
+		<th></th>		<th></th>
+	</tr>
+	{% for row in data['view'] %}
+	<tr>
+		<td>{{ loop.index }}</td>
+		<td>{{ row['product_name'] }}</td>
+			<td><a href="/{{ row['image'] }}"><img width="70" height="70" src="/{{ row['image'] }}"></a></td>
+		<td>{{ row['product_details'] }}</td>
+		
+		<td>{{ row['price'] }}</td>
+		<td>
+			{% if row['quantity']!=0 %}
+			<a class="btn btn-success" href="user_buy_products?pid={{row['product_id']}}">Buy</a>{% else %}<label style="color: red">Out of Stock</label>{% endif %}
+		</td>
+	</tr>
+	{% endfor %}{% else %}
+	No Products found in your locality <br><br><br>
+	<a class="btn btn-success" href="user_view_products">Click here for more items</a>
+	{% endif %}
+</table>
+</form>
+</center>
+
+{% include 'sub_footer.html' %}
+{% include 'footer.html' %}

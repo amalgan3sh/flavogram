@@ -1,0 +1,36 @@
+{% include 'user_header.html' %}
+{% include 'sub_header.html' %}
+<center><br>
+	<h1>Customer Feedback </h1><br>
+    <div style="width: 500px">
+             <p>If you have any questions or would like further clarification on any point, please feel free to reach out. Keep up the great work, and I look forward to seeing your website evolve</p>
+    <p>Keep in touch !!!</p>
+        </div>
+   
+    <br>
+	<form method="post">
+        <div style="width: 400px">
+            <textarea class="form-control" required placeholder="Write What You Feel..." required name="msg"></textarea><br>
+        </div>
+		<input type="submit" class="btn btn-primary" value="Send" name="submit">
+	</form><br>
+    <br>
+    {% if data['complaints'] %}
+    <h2>Your Message History</h2>
+    <br>
+    <table class=table style="width:500px">
+        <tr>
+            <th>Feedback</th>
+            <th>Response from FlavoGram</th>
+        </tr>
+        {% for row in data['complaints'] %}
+        <tr>
+            <td>{{row['complaint']}}</td>
+            <td>{% if row['reply']!='pending' %}{{row['reply']}}{% else %}<label title="Not Replied yet" style="color:blue">No Response yet{%endif%}</label></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</center>
+{% include 'sub_footer.html' %}
+{% include 'footer.html' %}

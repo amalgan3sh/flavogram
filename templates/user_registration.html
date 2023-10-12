@@ -1,0 +1,57 @@
+{%include "home_header.html"%}
+{% include 'sub_header.html' %}
+	<center>
+		<br>
+		<h1>Registration</h1>
+		<br><br>
+	<form method="post" enctype="multipart/form-data">
+	<table>
+		<tr>
+			<th>First Name</th>
+			<td><input type="text" name="fname" required class="form-control" pattern="[a-zA-Z\s]{0,30}"></td>
+		</tr>
+		<tr><td><br></td></tr>
+		<tr>
+			<th>Last Name</th>
+			<td><input type="text" name="lname" required class="form-control" pattern="[a-zA-Z\s]{0,30}" title="Special Characters Not Allowed"></td>
+		</tr>
+		<tr><td><br></td></tr>
+		<tr>
+			<th>House Name</th>
+			<td><input type="text" name="hname" required class="form-control" pattern="[a-zA-Z\s]{0,30}" title="Special Characters Not Allowed"></td>
+		</tr>
+		<tr><td><br></td></tr>
+		<tr>
+			<th>Place</th>
+			<td><input type="text" name="place" required class="form-control" pattern="[a-zA-Z\s]{0,30}"></td>
+		</tr>
+		<tr><td><br></td></tr>
+		<tr>
+			<th>Pincode</th>
+			<td><input type="text" name="pincode" required class="form-control" pattern="[0-9]{6}"></td>
+		</tr>
+		<tr><td><br></td></tr>
+		<tr>
+			<th>email</th>
+			<td><input type="email" name="email" required class="form-control"></td>
+		</tr>
+		<tr><td><br></td></tr>
+		<tr>
+			<th>Phone number</th>
+			<td><input type="text" name="phone" required class="form-control" pattern="[0-9]{10}"></td>
+		</tr>
+		<tr><td><br></td></tr>
+		<tr>
+			<th>Password</th>
+			<td><input type="password" name="passs" required class="form-control"></td>
+		</tr>
+		<tr><td><br></td></tr>
+		<tr>
+			<th align="center" colspan="2"><input class="btn btn-success" type="submit" name="submit" value="Register"></th>
+		</tr>
+		<tr><td><br></td></tr>
+	</table>
+	</form>
+	</center>
+{% include 'sub_footer.html' %}
+{% include 'footer.html' %}

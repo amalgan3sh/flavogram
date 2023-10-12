@@ -1,0 +1,40 @@
+{% include 'admin_header.html' %}
+{% include 'sub_header.html' %}
+<center><br>
+	<h1>Purchased Product</h1><br>
+	{% if data['view'] %}<br>
+	<table class="table">
+		<tr>
+			<th>Sl.No</th>
+			<th>Product</th>
+			<th>Cook Name</th>
+			<th>Details</th>
+			<th>Price</th>
+			<th>Image</th>
+			<th>Quantity</th>
+			<th>MFD</th>
+			<th>Expiry date</th>
+			<th></th>
+		</tr>
+		{% for i in data['view'] %}
+		<tr>
+			<td>{{ loop.index }}</td>
+			<td>{{ i['product_name'] }}</td>
+			<td>{{ i['staff_name'] }}</td>
+			<td>{{ i['product_details'] }}</td>
+			<td>{{ i['price'] }}</td>
+			<td><a href="/{{ i['image'] }}"><img width="70" height="70" src="/{{ i['image'] }}"></a></td>
+			<td>{{ i['pur_qty'] }}</td>
+			<td>{{ i['mfd_date'] }}</td>
+			<td>{{ i['exp_date'] }}{% if i['exp_date']<= d1 %}&emsp;<a class="btn btn-success" href="?expire_id={{i['cpurchase_id']}}">Mark as Expire</a>{% endif %}</td>
+			<!-- <td>
+				<a href="?action=expire&id={{i['cpurchase_id']}}" class="btn btn-danger">Mark as Expire</a>
+			</td> -->
+		</tr>
+		{% endfor %}
+	</table>
+	{% endif %}
+	<br>
+</center>
+{% include 'sub_footer.html' %}
+{% include 'footer.html' %}

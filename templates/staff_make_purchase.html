@@ -1,0 +1,54 @@
+{% include 'staff_header.html' %}
+{% include 'sub_header.html' %}
+<center>
+	<h1>Make Purchase</h1>
+	<form method="post">
+		<table>
+			<tr>
+				<th>Choose Product</th>
+				<td><input type="text" class="form-control"disabled="" name="pdtname" value="{{data['pdt'][0]['product_name']}}"></td>
+			</tr>
+			<tr>
+				<th>Select Staff</th>
+				<td><select class="form-control" required="" name="staff_id">
+					{% for i in data['staff'] %}
+					<option value="{{ i['staff_id'] }}">{{ i['staff_name'] }}</option>
+					{% endfor %}
+				</select></td>
+			</tr>
+			<tr>
+				<th>Company</th>
+				<td><select class="form-control" required="" name="cmp">
+					{% for i in data['vendor'] %}
+					<option value="{{ i['vendor_id'] }}">{{ i['company_name'] }}</option>
+					{% endfor %}
+				</select></td>
+			</tr>
+			<tr>
+				<th>MFG Date</th>
+				<td><input type="date" name="mfg" class="form-control" required=""></td>
+			</tr>
+			<tr>
+				<th>Expiry Date</th>
+				<td><input type="date" min="0" name="ex" class="form-control" required=""></td>
+			</tr>
+			<tr>
+				<th>Batch No</th>
+				<td><input type="number" min="1" name="bno" class="form-control" required=""></td>
+			</tr>
+			<tr>
+				<th>Quantity</th>
+				<td><input type="number" min="0" name="qty" class="form-control" required=""></td>
+			</tr>
+			<tr>
+				<th>Price</th>
+				<td><input type="number" min="0" name="price" class="form-control" required=""></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><input class="btn btn-success" type="submit" name="submit" value="Purchase"></td>
+			</tr>
+		</table>
+	</form>
+</center>
+{% include 'sub_footer.html' %}
+{% include 'footer.html' %}

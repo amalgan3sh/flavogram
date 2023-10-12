@@ -1,0 +1,76 @@
+{% include 'staff_header.html' %}
+{% include 'sub_header.html' %}
+<center>
+	<h1>Manage vendors</h1><br>
+	{% if data['updates'] %}
+	<h3>Update Details</h3><br>
+	<form method=post>
+		<table>
+			<tr>
+				<th>Company Name</th>
+				<td><input type="text" class="form-control" required value="{{ data['updates'][0]['company_name'] }}" pattern="[a-zA-Z\s]{0,30}" name="cmp"></td>
+			</tr>
+			<tr><td><br></td></tr>
+			<tr>
+				<th>Details</th>
+				<td><input type="text" class="form-control" required value="{{ data['updates'][0]['details'] }}" pattern="[a-zA-Z\s]{0,39}" name="det"></td>
+			</tr>
+			<tr><td><br></td></tr>
+			<tr>
+				<th>Est.Year</th>
+				<td><input type="text" class="form-control" pattern="[0-9]{4}" value="{{ data['updates'][0]['est_year'] }}" required name="estyear"></td>
+			</tr>
+			<tr><td><br></td></tr>
+			<tr>
+				<td colspan="2" align="center"><input class="btn btn-success" type="submit" name="update_submit" value="Update"></td>
+			</tr>
+		</table>
+	</form><br>
+	{% else %}
+	<form method=post>
+		<table>
+			<tr>
+				<th>Company Name</th>
+				<td><input type="text" class="form-control" required pattern="[a-zA-Z\s]{0,30}" name="cmp"></td>
+			</tr>
+			<tr><td><br></td></tr>
+			<tr>
+				<th>Details</th>
+				<td><input type="text" class="form-control" required pattern="[a-zA-Z\s]{0,39}" name="det"></td>
+			</tr>
+			<tr><td><br></td></tr>
+			<tr>
+				<th>Est.Year</th>
+				<td><input type="text" class="form-control" pattern="[0-9]{4}" required name="estyear"></td>
+			</tr>
+			<tr><td><br></td></tr>
+			<tr>
+				<td colspan="2" align="center"><input class="btn btn-primary" type="submit" name="submit" value="Add Vendor"></td>
+			</tr>
+		</table>
+	</form><br>
+{% endif %}
+{% if data['vend'] %}<br><br>
+<h2>Company Details</h2><br>
+<table class="table" style="width:600px">
+	<tr>
+		<th>Sl.No</th>
+		<th>Company Name</th>
+		<th>Details</th>
+		<th>Established Year</th>
+		<th colspan="2"></th>
+	</tr>
+	{% for row in data['vend'] %}
+	<tr>
+		<td>{{ loop.index }}</td>
+		<td>{{ row['company_name'] }}</td>
+		<td>{{ row['details'] }}</td>
+		<td>{{ row['est_year'] }}</td>
+		<td><a class="btn btn-success" href="?action=update&vid={{row['vendor_id']}}">Update</a></td>
+		<td><a class="btn btn-danger" href="?action=remove&vid={{row['vendor_id']}}">Remove</a></td>
+	</tr>
+	{% endfor %}
+</table>{% endif %}
+</center>
+{% include 'sub_footer.html' %}
+{% include 'footer.html' %}

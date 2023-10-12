@@ -1,0 +1,36 @@
+{% include 'user_header.html' %}
+{% include 'sub_header.html' %}
+<center>
+	<form method="post"><br>
+		{% if data['view'] %}
+
+	<h1>Order Products</h1><br>
+	<table class=table style="width:500px !important;">
+		<tr>
+			<th>Sl.No</th>
+			<th>Product Name</th>
+			<th>Quantity</th>
+			<th>Price</th>
+			<th>Status</th>
+		</tr>
+		{% for row in data['view'] %}
+		<tr>
+			<td>{{ loop.index }}</td>
+			<td>{{ row['product_name'] }}</td>
+			<td>{{ row['oqty'] }}</td>
+			<td>{{ row['amount'] }}</td>
+			<td>{{ row['status'] }}</td>
+		</tr>
+		{% endfor %}
+	</table>
+	
+</form>{% else %}
+<br><br><br>
+<h2>You have no Products</h2><br>
+<h3><a class="btn btn-primary" href="user_view_products">Click Here to Purchase </a></h3>
+<br><br><br>
+{% endif %}
+</center>
+{% include 'sub_footer.html' %}
+
+{% include 'footer.html' %}

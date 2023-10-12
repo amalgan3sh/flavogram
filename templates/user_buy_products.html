@@ -1,0 +1,63 @@
+{% include 'user_header.html' %}
+{% include 'sub_header.html' %}
+<center>
+<script type="text/javascript">
+ 	function TestOnTextChange()
+ 	{
+ 		var a= document.getElementById("price").value;
+ 		var b= document.getElementById("quantity").value;
+ 		var c= document.getElementById("oquantity").value;
+ 		if(parseInt(b)>=parseInt(c))
+ 		{
+	 		var s=parseInt(a)*parseInt(c)
+	 		document.getElementById("total").value=s;
+ 		}
+ 		else
+ 		{
+ 			document.getElementById("total").value="";
+ 			document.getElementById("oquantity").value="";
+ 			alert("Enter quantity less than current quantity");
+ 		}
+ 	}
+ </script>
+<h2>Add to Cart</h2>
+<form method="post">
+	<table class="table">
+		<tr>
+			<td>Item Name :</td>
+			<td><input type="text" class="form-control" disabled required name="itemname" value="{{ data['addtocarts'][0]['product_name'] }}"></td>
+		</tr>
+		<tr>
+			<td> Standard Price per item :</td>
+			<td><input type="number" id="price" class="form-control" min=0 disabled name="price" value="{{ data['addtocarts'][0]['price'] }}" ></td>
+		</tr><!-- 
+		<tr></tr>
+		<tr></tr>
+		<tr>
+			<td>Quantity left:</td>
+			<td><input type="number" class="form-control" disabled id="quantity" value="{{ data['addtocarts'][0]['quantity'] }}" required min=0 name="quantity"></td>
+		</tr> -->
+		<tr></tr>
+		<tr></tr>
+		<tr>
+			<td>Quantity :</td>
+			<td><input type="number" class="form-control" required  id="oquantity" onkeyup="TestOnTextChange()" placeholder="Don't exceed limits" name="order_quantity"></td>
+		</tr>
+		<tr></tr>
+		<tr></tr>
+		<tr>
+			<td>Your Total Amount :</td>
+			<td><input type="text" class="form-control" readonly id="total" name="amount"></td>
+		</tr>
+		<tr></tr>
+		<tr></tr>
+		<tr>
+			<td colspan="2" align="center"><input type="submit" class="btn btn-info" name="submit" value="Add to Cart"></td>
+		</tr>
+	</table>
+</form>
+</center>
+{% include 'sub_footer.html' %}
+{% include 'footer.html' %}
+
+			<input type="hidden" class="form-control" disabled id="quantity" value="{{ data['addtocarts'][0]['quantity'] }}" required min=0 name="quantity">

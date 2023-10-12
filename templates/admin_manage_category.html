@@ -1,0 +1,65 @@
+{% include 'admin_header.html' %}
+{% include 'sub_header.html' %}
+<center>
+	<form method="post">
+	{% if data['updates'] %}
+	<h2>Update Category</h2><br><br>
+	<table>
+		<tr>
+			<td>Category:</td>
+			<td><input type="text" pattern="[a-zA-Z\s]{0,20}" required class="form-control" name="catname" value="{{data['updates'][0]['cat_name']}}"></td>
+		</tr>
+		<tr><td><br></td></tr>
+		<tr>
+			<td>Description:</td>
+			<td><input type="text" pattern="[a-zA-Z\s]{0,20}" required class="form-control" name="desc" value="{{data['updates'][0]['description']}}"></td>
+		</tr>
+		<tr><td><br></td></tr>
+		<tr>
+			<td align="center" colspan="2"><input class="btn btn-success" type="submit" name="submit_update" value="Update"></td>
+		</tr>
+		<tr><td><br></td></tr>
+	</table><br>
+	{% else %}
+	<h2>Add Category</h2><br><br>
+	<table>
+		<tr>
+			<td>Category:</td>
+			<td><input type="text" pattern="[a-zA-Z\s]{0,20}" required class="form-control" name="catname"></td>
+		</tr>
+		<tr><td><br></td></tr>
+		<tr>
+			<td>Description:</td>
+			<td><input type="text" pattern="[a-zA-Z\s]{0,20}" required class="form-control" name="desc"></td>
+		</tr>
+		<tr><td><br></td></tr>
+		<tr>
+			<td align="center" colspan="2"><input type="submit" class="btn btn-primary" name="submit" value="Add Category"></td>
+		</tr>
+		<tr><td><br></td></tr>
+	</table>
+	{% endif %}
+</form>
+<br>
+{% if data['cat'] %}
+<h2>Category Details</h2><br>
+<table class="table" style="width:600px">
+	<tr>
+		<th>Sl.No</th>
+		<th>Category</th>
+		<th>Description</th>
+		<th colspan="2"></th>
+	</tr>
+	{% for row in data['cat'] %}
+	<tr>
+		<td>{{ loop.index }}</td>
+		<td>{{ row['cat_name'] }}</td>
+		<td>{{ row['description'] }}</td>
+		<td><a class="btn btn-success" href="?action=update&cid={{row['cat_id']}}">Update</a></td>
+		<!-- <td><a class="btn btn-danger" href="?action=remove&cid={{row['cat_id']}}">Remove</a></td> -->
+	</tr>
+	{% endfor %}
+</table>{% endif %}
+</center>
+{% include 'sub_footer.html' %}
+{% include 'footer.html' %}

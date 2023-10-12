@@ -1,0 +1,46 @@
+{% include 'admin_header.html' %}
+{% include 'sub_header.html' %}
+<center>
+	<h1>Customer Details</h1><br>
+	{% if data['view'] %}
+	<h3 style="color:brown"> Go to down to Print Customer Details</h3><br><br>
+<div id="div_print" >
+	<table class="table" style="width: 700px">
+		<tr>
+			<th>Sl.No</th>
+			<th>Name</th>
+			<th>House Name</th>
+			<th>Place</th>
+			<th>Pincode</th>
+			<th>Phone</th>
+			<th>Email</th>
+		</tr>
+		{% for i in data['view'] %}
+		<tr>
+			<td>{{ loop.index }}</td>
+			<td>{{ i['urname'] }}</td>
+			<td>{{ i['house_name'] }}</td>
+			<td>{{ i['place'] }}</td>
+			<td>{{ i['pincode'] }}</td>
+			<td>{{ i['phone'] }}</td>
+			<td>{{ i['email'] }}</td>
+		</tr>
+		{% endfor %}
+	</table>
+	{% else %}
+	<h3>No Customers</h3>
+	{% endif %}<br><br>
+</div><a class="btn btn-success" onclick="printDiv()" href="?">click to print</a><br>
+
+</center>
+{% include 'sub_footer.html' %}
+{% include 'footer.html' %}
+	<script> 
+		function printDiv() { 
+			var divContents = document.getElementById("div_print").innerHTML; 
+			var a = window.open('', '', 'height=500, width=500'); 
+			a.document.write(divContents); 
+			a.document.close(); 
+			a.print(); 
+		} 
+	</script> 

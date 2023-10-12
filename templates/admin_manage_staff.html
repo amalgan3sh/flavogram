@@ -1,0 +1,103 @@
+{% include 'admin_header.html' %}
+{% include 'sub_header.html' %}
+<center>
+	<h1>Manage Home Cook</h1>
+
+{% if data['update_view'] %}
+<h3>Update Details</h3><br>
+	<form method="post">
+		<table>
+			<tr>
+				<th>Name</th>
+				<td><input type="text" class="form-control" required="" value="{{ data['update_view'][0]['staff_name'] }}" pattern="[a-zA-Z0-9\s]{0,30}" name="staff_name"></td>
+			</tr>
+			<tr>
+				<th>Number</th>
+				<td><input type="text" class="form-control" required="" value="{{ data['update_view'][0]['staff_num'] }}" pattern="[0-9]{10}" name="staff_num"></td>
+			</tr>
+			<tr>
+				<th>City</th>
+				<td><input type="text" class="form-control" required="" value="{{ data['update_view'][0]['staff_city'] }}" pattern="[a-zA-Z0-9\s]{0,30}" name="staff_city"></td>
+			</tr>
+			<tr>
+				<th>Pincode</th>
+				<td><input type="text" class="form-control" required="" value="{{ data['update_view'][0]['staff_pin'] }}" pattern="[0-9]{6}" name="staff_pin"></td>
+			</tr>
+			<tr>
+				<th>Details</th>
+				<td><textarea class="form-control" required="" value="{{ data['update_view'][0]['details'] }}" name="details"></textarea></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><input class="btn btn-primary" type="submit" name="update_submit" value="Update"></th>
+			</tr>
+		</table>
+	</form>
+{% else %}<br>
+	<form method="post">
+		<table>
+			<tr>
+				<th>Name</th>
+				<td><input type="text" class="form-control" required="" pattern="[a-zA-Z0-9\s]{0,30}" name="staff_name"></td>
+			</tr>
+			<tr>
+				<th>Number</th>
+				<td><input type="text" class="form-control" required="" pattern="[0-9]{10}" name="staff_num"></td>
+			</tr>
+			<tr>
+				<th>City</th>
+				<td><input type="text" class="form-control" required="" pattern="[a-zA-Z0-9\s]{0,30}" name="staff_city"></td>
+			</tr>
+			<tr>
+				<th>Pincode</th>
+				<td><input type="text" class="form-control" required="" pattern="[0-9]{6}" name="staff_pin"></td>
+			</tr>
+			<tr>
+				<th>Details</th>
+				<td><textarea class="form-control" required="" name="details"></textarea></td>
+			</tr>
+			<tr>
+				<th>Email</th>
+				<td><input type="email" class="form-control" required="" name="username"></td>
+			</tr>
+			<tr>
+				<th>Create Password</th>
+				<td><input type="text" class="form-control" required="" pattern="[a-zA-Z0-9]{0,30}" name="psw"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><input class="btn btn-primary" type="submit" name="submit" value="Add"></th>
+			</tr>
+		</table>
+	</form>
+{% endif %}
+	<br><br>
+	<h1>Staff Details</h1>
+	<table class="table">
+		<tr>
+			<th>Sl.No</th>
+			<th>Name</th>
+			<th>Email</th>
+			<th>Number</th>
+			<th>Details</th>
+			<th>City</th>
+			<th>Pincode</th>
+			<th></th>
+		</tr>
+		{% for row in data['view'] %}
+		<tr>
+			<td>{{ loop.index }}</td>
+			<td>{{ row['staff_name'] }}</td>
+			<td>{{ row['username'] }}</td>
+			<td>{{ row['staff_num'] }}</td>
+			<td>{{ row['details'] }}</td>
+			<td>{{ row['staff_city'] }}</td>
+			<td>{{ row['staff_pin'] }}</td>
+			<td>
+				<a class="btn btn-success" href="?action=update&id={{ row['username'] }}">Update</a>
+				<!-- <a class="btn btn-danger" href="?action=delete&id={{ row['username'] }}">Delete</a> -->
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+</center>
+{% include 'sub_footer.html' %}
+{% include 'footer.html' %}

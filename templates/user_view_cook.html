@@ -1,0 +1,39 @@
+{% include 'user_header.html' %}
+{% include 'sub_header.html' %}
+<center>
+	<br><br>
+	<h1>Our Cooks</h1>
+
+	<br><br>
+	<table class="table">
+		<tr>
+			<th>Sl.No</th>
+			<th>Name</th>
+			<th>Email</th>
+			<th>Number</th>
+			<th>Details</th>
+			<th>City</th>
+			<th>Pincode</th>
+			<th></th>
+		</tr>
+		{% for row in data['view'] %}
+		<tr>
+			<td>{{ loop.index }}</td>
+			<td>{{ row['staff_name'] }}</td>
+			<td>{{ row['username'] }}</td>
+			<td>{{ row['staff_num'] }}</td>
+			<td>{{ row['details'] }}</td>
+			<td>{{ row['staff_city'] }}</td>
+			<td>{{ row['staff_pin'] }}</td>
+			<td>
+				<!-- <i href="?action=update&id={{ row['username'] }}" class="icon-heart text-danger" aria-hidden="true"></i> -->
+
+				<a class="btn btn-info" href="user_view_cook_products?action=update&id={{ row['staff_id'] }}">View Products</a>
+				<!--<a class="btn btn-success" href="?action=update&id={{ row['staff_id'] }}">Add to Fav</a>-->
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+</center>
+{% include 'sub_footer.html' %}
+{% include 'footer.html' %}

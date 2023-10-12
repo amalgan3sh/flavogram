@@ -1,0 +1,32 @@
+{% include 'staff_header.html' %}
+{% include 'sub_header.html' %}
+<center>
+{% if data['view'] %}
+<h2>Online Order Details</h2><br>
+<table class="table" style="width:600px">
+	<tr>
+		<th>Sl.No</th>
+		<th>Customer Name</th>
+		<th>Place</th>
+		<th>Phone</th>
+		<th>Total</th>
+		<th></th>
+	</tr>
+	{% for row in data['view'] %}
+	<tr>
+		<td>{{ loop.index }}</td>
+		<td>{{ row['ename'] }}</td>
+		<td>{{ row['place'] }}</td>
+		<td>{{ row['phone'] }}</td>
+		<td>{{ row['total'] }}</td>
+		<td>
+            <div class="outs_more-buttn"><a href="staff_view_online_orders_details?action=update&omid={{row['order_master_id']}}">Order Details</a></div>
+        </td>
+	</tr>
+	{% endfor %}
+</table>{% else %}
+<div class="jumbotron"><h3>Off Sale Details</h3><br><h4>Not Available</h4></div>
+{% endif %}
+</center>
+{% include 'sub_footer.html' %}
+{% include 'footer.html' %}

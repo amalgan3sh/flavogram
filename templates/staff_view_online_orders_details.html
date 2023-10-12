@@ -1,0 +1,38 @@
+{% include 'staff_header.html' %}
+{% include 'sub_header.html' %}
+<center>
+{% if data['pay'] %}
+<div class="jumbotron" style="width: 600px"><h3>Payment Details</h3><br><h4>Paid Amount : {{data['pay'][0]['amount']}}</h4><h4>Paid on : {{data['pay'][0]['date']}}</h4></div>
+{% else %}
+{% if data['view'] %}
+<h2>Order Details</h2><br>
+<h4>Customer Name : {{data['view'][0]['ename']}}</h4><br>
+<table class="table" style="width:700px">
+	<tr>
+		<th></th>
+		<th>Sl.No</th>
+		<th>Product</th>
+		<th>Image</th>
+		<th>Quantity</th>
+		<th>Amount</th>
+		<th></th>
+	</tr>
+	{% for row in data['view'] %}
+	<tr>
+		<th></th>
+		<td>{{ loop.index }}</td>
+		<td>{{ row['product_name'] }}</td>
+		<td><a href="/{{ row['image'] }}"><img width="70" height="70" src="/{{ row['image'] }}"></a></td>
+		<td>{{ row['quantity'] }}</td>
+		<td>{{ row['amount'] }}</td>
+		<td><a class="btn btn-warning" href="?omid={{row['order_master_id']}}&o_mid={{row['order_master_id']}}">Payment Details</a></td>
+	</tr>
+	{% endfor %}
+</table>
+<br><br>{% else %}
+<div class="jumbotron"><h3>Order Details</h3><br><h4>Not Available</h4></div>
+{% endif %}
+{% endif %}
+</center>
+{% include 'sub_footer.html' %}
+{% include 'footer.html' %}

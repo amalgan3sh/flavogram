@@ -1,0 +1,36 @@
+{% include 'staff_header.html' %}
+{% include 'sub_header.html' %}
+<center><br>
+	{% if data['view'] %}
+	<h2>Products Details</h2><br>
+<table class="table" style="width:600px">
+		<tr>
+			<th>Sl.No</th>
+			<th>Product</th>
+			<!-- <th>Company Name</th> -->
+			<th>Details</th>
+			<!-- <th>Quantity</th> -->
+			<th>Price</th>
+			<th></th>
+		</tr>
+		{% for i in data['view'] %}
+		<tr>
+			<td>{{ loop.index }}</td>
+			<td>{{ i['product_name'] }}</td>
+			<!-- <td>{{ i['company_name'] }}</td> -->
+			<td>{{ i['product_details'] }}</td>
+			<!-- <td>{{ i['quantity'] }}</td> -->
+			<td>{{ i['price'] }}</td>
+			<td>
+				<a href="staff_make_purchase?pid={{i['product_id']}}" class="btn btn-success">Purchase</a>
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+	{% else %}
+	products not added yet
+	{% endif %}
+	<br>
+</center>
+{% include 'sub_footer.html' %}
+{% include 'footer.html' %}

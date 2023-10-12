@@ -1,0 +1,15 @@
+{% include 'user_header.html' %}
+{% include 'sub_header.html' %}
+<center>
+	
+<br>
+<div align="center"> 
+	<form method="post">
+		<h2> Payment </h2><br><br>
+		<h6>Total Amount : {{data['view'][0]['total']}} </h6><br>
+		<input type="submit" value="Click here to pay"  class="btn btn-success" name="pay">
+	</div>
+</form>
+</center>
+{% include 'sub_footer.html' %}
+{% include 'footer.html' %}

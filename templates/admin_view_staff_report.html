@@ -1,0 +1,39 @@
+{% include 'admin_header.html' %}
+{% include 'sub_header.html' %}
+<center><br>
+<div id="div_print" >
+	<h1>Home Cook Report</h1><br>
+	<table class="table">
+		<tr>
+			<th>Sl no</th>
+			<th>Name</th>
+			<th>Phone</th>
+			<th>Details</th>
+			<th>City</th>
+			<th>Pin</th>
+		</tr>
+		{% for row in data['staff'] %}
+		<tr>
+			<td>{{ loop.index }}</td>
+			<td>{{ row['staff_name'] }}</td>			
+			<td>{{ row['staff_num'] }}</td>
+			<td>{{ row['details'] }}</td>
+			<td>{{ row['staff_city'] }}</td>
+			<td>{{ row['staff_pin'] }}</td>
+		</tr>
+		{% endfor %}
+	</table><br>
+<a class="btn btn-success" onclick="printDiv()" href="?">click to print</a><br>
+</center>
+{% include 'sub_footer.html' %}
+{% include 'footer.html' %}
+
+	<script> 
+		function printDiv() { 
+			var divContents = document.getElementById("div_print").innerHTML; 
+			var a = window.open('', '', 'height=500, width=500'); 
+			a.document.write(divContents); 
+			a.document.close(); 
+			a.print(); 
+		} 
+	</script> 
